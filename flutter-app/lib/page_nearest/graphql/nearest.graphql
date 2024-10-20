@@ -1,0 +1,32 @@
+query saunaList($where: SaunaFilterInput, $after: String, $first: Int, $picturesFirst: Int) {
+    saunaList(where: $where, after: $after, first: $first) {
+        pageInfo {
+            hasNextPage
+            hasPreviousPage
+            endCursor
+        }
+        edges {
+            cursor
+            node {
+                ...SaunaList
+            }
+        }
+    }
+}
+
+query saunaDetail($id: ID!) {
+    saunaDetail(id: $id) {
+        ...SaunaFullDetail
+    }
+}
+
+mutation manageMyFavorite($saunaId: ID!, $isMyFavorite: Boolean!, $picturesFirst: Int) {
+    manageMyFavorite(saunaId: $saunaId, isMyFavorite: $isMyFavorite) {
+        errors {
+            ...ErrorDetail
+        }
+        sauna {
+            ...SaunaList
+        }
+    }
+}

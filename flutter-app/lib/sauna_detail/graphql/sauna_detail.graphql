@@ -1,0 +1,5 @@
+query saunaDetail($id: ID!) {
+    saunaDetail(id: $id) {
+        ...SaunaFullDetail
+    }
+}

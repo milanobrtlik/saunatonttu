@@ -1,0 +1,19 @@
+query myVisits {
+    myVisits(first: 15) {
+        nodes {
+            ...VisitHistoryListItem
+        }
+    }
+}
+
+mutation visitHistoryAdd($input: VisitHistoryCreateInput!) {
+    visitHistoryCreate(input: $input) {
+        visitHistory {
+            ...VisitHistoryListItem
+        }
+        errors {
+            code
+            message
+        }
+    }
+}

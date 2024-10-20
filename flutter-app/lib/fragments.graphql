@@ -1,0 +1,131 @@
+fragment ErrorDetail on UserError {
+    message
+    code
+}
+
+fragment SaunaAutocompleteFragment on Sauna {
+    id
+    name
+}
+
+fragment SaunaList on Sauna {
+    ...SaunaAutocompleteFragment
+    leadParagraph
+    address
+    location {
+        ...Location
+    }
+    isPrivate
+    isMyFavorite
+    pictures(first: $picturesFirst) {
+        nodes {
+            ...Picture
+        }
+    }
+}
+
+fragment Location on GeoJSONPointType {
+    bbox
+    coordinates
+    crs
+    type
+}
+
+fragment SaunaFullDetail on Sauna {
+    id
+    name
+    leadParagraph
+    content
+    email
+    phone
+    address
+    isPrivate
+    pictures {
+        nodes {
+            ...Picture
+        }
+    }
+    openingHours {
+        ...OpeningHour
+    }
+    prices {
+        ...Price
+    }
+    url
+    location {
+        coordinates
+    }
+}
+
+fragment Price on Price {
+    id
+    label
+    value
+    currency {
+        ...Currency
+    }
+}
+
+fragment Currency on Currency {
+    id
+    code
+    dollarRatio
+}
+
+fragment OpeningHour on OpeningHour {
+    id
+    dayOfWeek
+    open
+    close
+}
+
+fragment Picture on Picture {
+    id
+    thumbnailUrl
+    fullSizeUrl
+}
+
+fragment PictureThumbnail on Picture {
+    id
+    thumbnailUrl
+}
+
+fragment AttributeDetail on Attribute {
+    id
+    name
+    description
+    icon
+}
+
+fragment VisitHistoryListItem on VisitHistory {
+    id
+    sauna {
+        ...SaunaAutocompleteFragment
+    }
+    duration
+    visitedAt
+}
+
+fragment VisitHistoryDetail on VisitHistory {
+    id
+    sauna {
+        ...SaunaAutocompleteFragment
+    }
+    visitedAt
+    duration
+    cycles
+    rating
+    review
+    note
+}
+
+fragment UserFragment on User {
+    id
+    name
+    avatarUrl
+}
+
+fragment MeFragment on User {
+    ...UserFragment
+    email
+}

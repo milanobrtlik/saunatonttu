@@ -1,0 +1,7 @@
+query autocompleteSearch($input: SaunaFilterInput) {
+    saunaList(where: $input) {
+        nodes {
+            ...SaunaAutocompleteFragment
+        }
+    }
+}
